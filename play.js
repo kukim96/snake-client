@@ -5,6 +5,6 @@ const connection = connect();
 
 console.log('Connecting ...');
 
-setupInput();
+setupInput(connection);
 
- module.exports = { connect };
+module.exports = { connect };
