@@ -9,7 +9,9 @@ const connect = function() {
 
   conn.on('connect', function () {
     console.log('You are connected to the game');
+    conn.write('Name: DKK');
   });
+
   conn.on('data', function (data) {
     console.log(data);
   });
@@ -17,4 +19,4 @@ const connect = function() {
   return conn;
 }
 
-
+module.exports = { connect };
