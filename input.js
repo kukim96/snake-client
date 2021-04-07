@@ -1,3 +1,4 @@
+const { MOVE_UP_KEY, MOVE_LEFT_KEY, MOVE_DOWN_KEY, MOVE_RIGHT_KEY } = require('./constants');
 
 let connection;
 
@@ -15,24 +16,34 @@ const setupInput = function(conn) {
   });
   return stdin;
 };
+let func;
 
 const handleUserInput = function (key) {
   const stdout = process.stdout;
+  const interval = function(key) {
+    func = setInterval(() => {
+      connection.write(key);
+    }, 50)
+  }
   if (key === '\u0003') {
     stdout.write('Exited the game. Good bye now.\n');
     process.exit();
   }
   if (key === 'w') {
-    connection.write("Move: up");
+    clearInterval(func);
+    interval(MOVE_UP_KEY);
   }
   if (key === 'a') {
-    connection.write("Move: left");
+    clearInterval(func);
+    interval(MOVE_LEFT_KEY);
   }
   if (key === 's') {
-    connection.write("Move: down");
+    clearInterval(func);
+    interval(MOVE_DOWN_KEY);
   }
   if (key === 'd') {
-    connection.write("Move: right")
+    clearInterval(func);
+    interval(MOVE_RIGHT_KEY);
   }
   if (key === 'f') {
     connection.write(msg + hello);
